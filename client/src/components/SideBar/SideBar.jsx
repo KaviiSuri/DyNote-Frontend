@@ -22,6 +22,7 @@ import {
   import "./SideBar.css"
 import React from 'react'
 import AddWorkBook from "../AddWorkBook/AddWorkBook";
+import NoteBooks from "../NoteBooks/NoteBooks";
 const SideBar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return ( <>
@@ -81,7 +82,18 @@ const SideBar = () => {
 
               <Stack spacing="10px">
                 <AddWorkBook/>
-              <Menu>
+                  <NoteBooks/>
+          
+              </Stack>
+              </DrawerBody>
+            </DrawerContent>
+          </DrawerOverlay>
+        </Drawer>
+      </> );
+}
+ 
+export default SideBar;
+{/* <Menu>
                   <MenuButton as={Button} 
                   _hover={{ bg: "transparent" }}
                   width="100%"
@@ -97,7 +109,6 @@ const SideBar = () => {
                   borderRadius="0px" 
                   bg="brand.dark"
                   color="white"
-            
                   rightIcon={<HiChevronDown />}>
                     WEB DEV
                   </MenuButton>
@@ -108,14 +119,4 @@ const SideBar = () => {
                     <MenuItem>Competitive Programing</MenuItem>
             
                   </MenuList>
-                </Menu>
-          
-              </Stack>
-              </DrawerBody>
-            </DrawerContent>
-          </DrawerOverlay>
-        </Drawer>
-      </> );
-}
- 
-export default SideBar;
+                </Menu> */}
