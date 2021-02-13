@@ -17,7 +17,7 @@ export function WorkspaceProvider({ children }) {
     setCurrentWorkspaceId,
     workspaceData,
     setWorkspaceData,
-  ] = useContainer(`${rootUrl}/workspace`, backendUser, "workspaces");
+  ] = useContainer(`${rootUrl}/workspace`, backendUser, "workspaces", true);
 
   return (
     <WorkspaceContext.Provider

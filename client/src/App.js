@@ -5,6 +5,7 @@ import Home from "./pages/Home/home";
 import WorkSpace from "./pages/WorkSpace/workspace";
 import { AuthProvider } from "./providers/authProvider";
 import { NotebookProvider } from "./providers/notebookProvider";
+import { ScrollProvider } from "./providers/scrollProvider";
 import { WorkspaceProvider } from "./providers/workspaceProvider";
 
 function App() {
@@ -13,13 +14,15 @@ function App() {
     <AuthProvider>
       <WorkspaceProvider>
         <NotebookProvider>
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/workspace" component={WorkSpace} />
-            {/* <Route path="/not-found" component={NotFound} /> */}
-            <Redirect from="/" exact to="/home" />
-            {/* <Redirect to="/not-found" /> */}
-          </Switch>
+          <ScrollProvider>
+            <Switch>
+              <Route path="/home" component={Home} />
+              <Route path="/workspace" component={WorkSpace} />
+              {/* <Route path="/not-found" component={NotFound} /> */}
+              <Redirect from="/" exact to="/home" />
+              {/* <Redirect to="/not-found" /> */}
+            </Switch>
+          </ScrollProvider>
         </NotebookProvider>
       </WorkspaceProvider>
     </AuthProvider>

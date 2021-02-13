@@ -14,8 +14,18 @@ import { useNotebook } from "../../providers/notebookProvider";
 const NoteBooks = () => {
   const { workspaceData } = useWorkspace();
   const { currentNotebookId, setCurrentNotebookId } = useNotebook();
+  const getDefaultIndex = () => {
+    let index = 0;
+    if (workspaceData && workspaceData.notebooks) {
+      index = Math.max(
+        0,
+        workspaceData.notebooks.findIndex((nb) => nb._id === currentNotebookId)
+      );
+    }
+    return [index];
+  };
   return (
-    <Accordion defaultIndex={[0]} allowMultiple>
+    <Accordion defaultIndex={getDefaultIndex()} allowMultiple>
       {workspaceData &&
         workspaceData.notebooks &&
         workspaceData.notebooks.map((nb) => {
@@ -61,16 +71,18 @@ const NoteBooks = () => {
                 color="white"
                 pb={4}
               >
-                {nb.scrolls.map((sc) => {
-                  return (
-                    <Link
-                      to={`/workspace/scroll/${sc._id}`}
-                      className="notebook__link"
-                    >
-                      {sc.name}
-                    </Link>
-                  );
-                })}
+                {nb &&
+                  nb.scrolls &&
+                  nb.scrolls.map((sc) => {
+                    return (
+                      <Link
+                        to={`/workspace/scroll/${sc._id}`}
+                        className="notebook__link"
+                      >
+                        {sc.name}
+                      </Link>
+                    );
+                  })}
               </AccordionPanel>
             </AccordionItem>
           );
