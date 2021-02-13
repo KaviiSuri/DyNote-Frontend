@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./pages/Home/home";
 import WorkSpace from "./pages/WorkSpace/workspace";
 import { AuthProvider } from "./providers/authProvider";
+import { NotebookProvider } from "./providers/notebookProvider";
 import { WorkspaceProvider } from "./providers/workspaceProvider";
 
 function App() {
@@ -11,13 +12,15 @@ function App() {
   return (
     <AuthProvider>
       <WorkspaceProvider>
-        <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/workspace" component={WorkSpace} />
-          {/* <Route path="/not-found" component={NotFound} /> */}
-          <Redirect from="/" exact to="/home" />
-          {/* <Redirect to="/not-found" /> */}
-        </Switch>
+        <NotebookProvider>
+          <Switch>
+            <Route path="/home" component={Home} />
+            <Route path="/workspace" component={WorkSpace} />
+            {/* <Route path="/not-found" component={NotFound} /> */}
+            <Redirect from="/" exact to="/home" />
+            {/* <Redirect to="/not-found" /> */}
+          </Switch>
+        </NotebookProvider>
       </WorkspaceProvider>
     </AuthProvider>
   );
