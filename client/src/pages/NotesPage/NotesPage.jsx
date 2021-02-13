@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactPlayer from 'react-player'
 import {IoMdAddCircle} from "react-icons/io"
+import {AiFillEye,AiFillEyeInvisible} from "react-icons/ai"
+import {FaShareAlt} from "react-icons/fa"
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 import "./NotesPage.css"
@@ -39,8 +41,9 @@ const NotesPage = () => {
         <div className="notes__scroll">
             <div className="notes__scrollhead">
                 <IoMdAddCircle size="24px" color="#0DBFBE"  />
-                <IoMdAddCircle/>
-                <IoMdAddCircle/>
+                <AiFillEye size="24px" color="#0DBFBE"  />
+                <AiFillEyeInvisible size="24px" color="#0DBFBE"  />
+                <FaShareAlt  size="24px" color="#0DBFBE"/>
             </div>
             <div className="notes__scrollbody">
                 <div className="notes__scrollselect">
