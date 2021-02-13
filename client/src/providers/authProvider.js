@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 import axios from "axios";
 import { rootUrl } from "../config";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import firebase from "firebase";
 const AuthContext = createContext();
 
@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
   const [backendUser, setBackendUser] = useState();
   const [loading, setLoading] = useState(true);
   const history = useHistory();
+  const location = useLocation();
   async function signup() {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -61,7 +62,8 @@ export function AuthProvider({ children }) {
       signinBackend(user).then((bcUser) => {
         setLoading(false);
         if (user && bcUser) {
-          history.push("/workspace");
+          if (location.pathname === "/" || location.pathname === "/home")
+            history.push("/workspace");
         }
       });
     });
