@@ -11,7 +11,7 @@
     width: 100%;
 }
 .notes__vid{
-    height: 50vh;
+    height: 50vh!important;
 }
 .notes__currentnote{
 background: #FFFFFF;
