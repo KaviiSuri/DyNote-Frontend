@@ -48,6 +48,7 @@ export function AuthProvider({ children }) {
         backendUser = res.data;
       }
       setBackendUser(backendUser);
+      return backendUser;
     } catch (error) {
       console.log(error);
     }
@@ -56,9 +57,9 @@ export function AuthProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setFirebaseUser(user);
       // create or login in backend
-      signinBackend(user).then(() => {
+      signinBackend(user).then((bcUser) => {
         setLoading(false);
-        if (user && backendUser) {
+        if (user && bcUser) {
           history.push("/workspace");
         }
       });
