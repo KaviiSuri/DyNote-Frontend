@@ -3,7 +3,7 @@ import axios from "axios";
 import { rootUrl } from "../config";
 import { useAuth } from "../providers/authProvider";
 
-export default function useContainer(getUrl, parent, key) {
+export default function useContainer(getUrl, parent, key, dontfetch) {
   // States
   const { firebaseUser, backendUser } = useAuth();
   const [currentId, setCurrentId] = useState();
@@ -27,7 +27,7 @@ export default function useContainer(getUrl, parent, key) {
   //==== effects ====
   //effect to refetch workspace when change in id
   useEffect(() => {
-    if (currentId) {
+    if (currentId && !dontfetch) {
       fetchData(currentId);
     }
   }, [currentId]);
@@ -41,5 +41,5 @@ export default function useContainer(getUrl, parent, key) {
       }
     }
   }, [parent]);
-  return [currentId, data, setCurrentId];
+  return [currentId, setCurrentId, data, setData];
 }

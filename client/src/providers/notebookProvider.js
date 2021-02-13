@@ -11,15 +11,43 @@ export function useNotebook() {
 }
 export function NotebookProvider({ children }) {
   const { workspaceData } = useWorkspace();
-  const [currentNotebookId, notebookData, setCurrentNotebookId] = useContainer(
-    `${rootUrl}/notebook`,
-    workspaceData,
-    "notebooks"
-  );
+  // const { firebaseUser, backendUser } = useAuth();
+  const [currentNotebookId, setCurrentNotebookId] = useState();
 
+  const [notebookData, setNotebookData] = useState();
+
+  //==== effects ====
+  //effect to refetch workspace when change in id
+  useEffect(() => {
+    if (currentNotebookId) {
+      if (workspaceData) {
+        setNotebookData(
+          workspaceData.notebooks.find((nb) => nb._id === currentNotebookId)
+        );
+      }
+    }
+  }, [currentNotebookId]);
+
+  useEffect(() => {
+    if (workspaceData) {
+      if (
+        !currentNotebookId ||
+        !workspaceData["notebooks"].includes(currentNotebookId)
+      ) {
+        if (workspaceData["notebooks"][0]) {
+          setCurrentNotebookId(workspaceData["notebooks"][0]._id);
+        }
+      }
+    }
+  }, [workspaceData]);
   return (
     <NotebookContext.Provider
-      value={{ currentNotebookId, notebookData, setCurrentNotebookId }}
+      value={{
+        currentNotebookId,
+        notebookData,
+        setCurrentNotebookId,
+        setNotebookData,
+      }}
     >
       {children}
     </NotebookContext.Provider>

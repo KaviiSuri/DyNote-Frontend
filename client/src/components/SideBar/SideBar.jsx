@@ -41,11 +41,13 @@ const SideBar = () => {
     setCurrentWorkspaceId,
   } = useWorkspace();
   const getCurrWorkspaceName = () => {
-    const obj = backendUser.workspaces.find(
-      (w) => w._id === currentWorkspaceId
-    );
-    if (obj && obj.name) return obj.name;
-    else return "no workspace";
+    if (backendUser) {
+      const obj = backendUser.workspaces.find(
+        (w) => w._id === currentWorkspaceId
+      );
+      if (obj && obj.name) return obj.name;
+      else return "no workspace";
+    } else return "no workspace";
   };
   return (
     <>
@@ -114,21 +116,23 @@ const SideBar = () => {
                   bg="brand.light"
                   borderRadius="none"
                 >
-                  {backendUser.workspaces
-                    .filter((w) => w._id !== currentWorkspaceId)
-                    .map((w) => {
-                      return (
-                        <MenuItem
-                          onClick={() => setCurrentWorkspaceId(w._id)}
-                          textAlign="center"
-                          textTransform="uppercase"
-                        >
-                          <Text textAlign="center" width="100%">
-                            {w.name}
-                          </Text>
-                        </MenuItem>
-                      );
-                    })}
+                  {backendUser &&
+                    backendUser.workspaces &&
+                    backendUser.workspaces
+                      .filter((w) => w._id !== currentWorkspaceId)
+                      .map((w) => {
+                        return (
+                          <MenuItem
+                            onClick={() => setCurrentWorkspaceId(w._id)}
+                            textAlign="center"
+                            textTransform="uppercase"
+                          >
+                            <Text textAlign="center" width="100%">
+                              {w.name}
+                            </Text>
+                          </MenuItem>
+                        );
+                      })}
                 </MenuList>
               </Menu>
             </DrawerHeader>

@@ -14,13 +14,19 @@ export function WorkspaceProvider({ children }) {
   const { backendUser } = useAuth();
   const [
     currentWorkspaceId,
-    workspaceData,
     setCurrentWorkspaceId,
+    workspaceData,
+    setWorkspaceData,
   ] = useContainer(`${rootUrl}/workspace`, backendUser, "workspaces");
 
   return (
     <WorkspaceContext.Provider
-      value={{ currentWorkspaceId, workspaceData, setCurrentWorkspaceId }}
+      value={{
+        currentWorkspaceId,
+        workspaceData,
+        setWorkspaceData,
+        setCurrentWorkspaceId,
+      }}
     >
       {/* <WorkspaceUpdateContext.Provider value={}> */}
       {children}

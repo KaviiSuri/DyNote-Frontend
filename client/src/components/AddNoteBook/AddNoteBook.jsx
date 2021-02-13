@@ -10,10 +10,45 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
+import axios from "axios";
+import React, { useRef } from "react";
+import { rootUrl } from "../../config";
 import { IoIosAdd } from "react-icons/io";
+import { useAuth } from "../../providers/authProvider";
+import { useWorkspace } from "../../providers/workspaceProvider";
 const AddNoteBook = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const nameRef = useRef();
+  const { firebaseUser } = useAuth();
+  const {
+    workspaceData,
+    currentWorkspaceId,
+    setWorkspaceData,
+  } = useWorkspace();
+  const onSubmit = async () => {
+    try {
+      const { data } = await axios.post(
+        `${rootUrl}/notebook`,
+        {
+          name: nameRef.current.value,
+          workspace_id: currentWorkspaceId,
+        },
+        {
+          headers: {
+            firebase_token: await firebaseUser.getIdToken(),
+          },
+        }
+      );
+      const newNotebookArr = workspaceData.notebooks.map((nb) => ({ ...nb }));
+      newNotebookArr.push({ _id: data._id, name: data.name });
+      setWorkspaceData({ ...workspaceData, notebooks: newNotebookArr });
+      onClose();
+    } catch (error) {
+      console.log(error);
+      console.log(error.response.data);
+      onClose();
+    }
+  };
   return (
     <>
       <Button
@@ -48,6 +83,7 @@ const AddNoteBook = () => {
                   "0 0 0px 0px rgba(88, 144, 255, 0), 0 1px 1px rgba(0, 0, 0, 0)",
               }}
               placeholder="NoteBook Title"
+              ref={nameRef}
             />
           </ModalBody>
 
@@ -61,7 +97,7 @@ const AddNoteBook = () => {
               bg="brand.medium"
               color="white"
               mr={3}
-              onClick={onClose}
+              onClick={onSubmit}
             >
               Create
             </Button>
