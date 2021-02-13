@@ -61,15 +61,20 @@ const NotesPage = ({ match }) => {
   };
 
   const onProgress = ({ played, playedSeconds, loaded, loadedSeconds }) => {
-    let currNoteIndex = notes.findIndex((nt) => nt.start_time > playedSeconds);
-    if (currNoteIndex === -1) {
-      currNoteIndex = notes.length - 1;
-    } else {
-      currNoteIndex = Math.max(0, currNoteIndex - 1);
+    if (notes && notes.length > 0) {
+      let currNoteIndex = notes.findIndex(
+        (nt) => nt.start_time > playedSeconds
+      );
+      if (currNoteIndex === -1) {
+        currNoteIndex = notes.length - 1;
+      } else {
+        currNoteIndex = Math.max(0, currNoteIndex - 1);
+      }
+      // console.log(notes.find((nt) => nt.start_time > playedSeconds));
+      // console.log("currNoteIndex: ", currNoteIndex);
+      if (notes && notes[currNoteIndex])
+        setCurrentNoteId(notes[currNoteIndex]._id);
     }
-    // console.log(notes.find((nt) => nt.start_time > playedSeconds));
-    // console.log("currNoteIndex: ", currNoteIndex);
-    setCurrentNoteId(notes[currNoteIndex]._id);
   };
   const patchNote = async (id, body) => {
     try {
