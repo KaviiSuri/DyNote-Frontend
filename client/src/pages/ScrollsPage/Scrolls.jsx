@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
 import {AiFillCaretRight} from "react-icons/ai"
 import ScrollCard from '../../components/ScrollCard/ScrollCard';
@@ -16,11 +16,6 @@ const Scrolls = () => {
     </div>
     <SimpleGrid mt="20" columns={[3 ,4, 4]} spacing="10">
         <ScrollCard/>
-        {/* <ScrollCard/> 
-        <ScrollCard/>
-        <ScrollCard/>
-        <ScrollCard/> 
-        <ScrollCard/> */}
         <CreateScrollCard />
     </SimpleGrid>
     </> );
