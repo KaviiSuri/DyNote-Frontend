@@ -33,7 +33,7 @@ const AddWorkSpace = () => {
         }
       );
       const newWorkspaceArr = backendUser.workspaces.map((w) => ({ ...w }));
-      newWorkspaceArr.push({ _id: data._id, name: data.name });
+      newWorkspaceArr.push(data);
       setBackendUser({ ...backendUser, workspaces: newWorkspaceArr });
       onClose();
     } catch (error) {

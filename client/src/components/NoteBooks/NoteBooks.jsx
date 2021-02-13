@@ -11,9 +11,11 @@ import { Link } from "react-router-dom";
 import { AiFillCaretDown } from "react-icons/ai";
 import { useWorkspace } from "../../providers/workspaceProvider";
 import { useNotebook } from "../../providers/notebookProvider";
+import { useScroll } from "../../providers/scrollProvider";
 const NoteBooks = () => {
   const { workspaceData } = useWorkspace();
   const { currentNotebookId, setCurrentNotebookId } = useNotebook();
+  const { currentScrollId } = useScroll();
   const getDefaultIndex = () => {
     let index = 0;
     if (workspaceData && workspaceData.notebooks) {
@@ -77,7 +79,12 @@ const NoteBooks = () => {
                     return (
                       <Link
                         to={`/workspace/scroll/${sc._id}`}
-                        className="notebook__link"
+                        className={
+                          "notebook__link" +
+                          (sc._id === currentScrollId
+                            ? " notebook__active"
+                            : "")
+                        }
                       >
                         {sc.name}
                       </Link>
