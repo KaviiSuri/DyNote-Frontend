@@ -117,7 +117,10 @@ const NotesPage = ({ match }) => {
                         "notes__scrollselect" +
                         (currentNoteId === nt._id ? " scroll__active" : "")
                       }
-                      onClick={() => setCurrentNoteId(nt._id)}
+                      onClick={() => {
+                        setCurrentNoteId(nt._id);
+                        playerRef.current.seekTo(nt.start_time, "seconds");
+                      }}
                     >
                       <div className="scroll__time">{nt.start_time}s</div>
                       <div className="scroll__title">{nt.name}</div>
