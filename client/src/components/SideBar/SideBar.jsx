@@ -26,7 +26,8 @@ import { VscVmActive } from "react-icons/vsc";
 
 import "./SideBar.css";
 import React from "react";
-import AddWorkBook from "../AddWorkBook/AddWorkBook";
+import AddWorkSpace from "../AddWorkSpace/AddWorkSpace";
+import AddNoteBook from "../AddNoteBook/AddNoteBook";
 import NoteBooks from "../NoteBooks/NoteBooks";
 import { useAuth } from "../../providers/authProvider";
 const SideBar = () => {
