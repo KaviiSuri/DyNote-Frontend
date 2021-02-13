@@ -22,17 +22,70 @@ width: 100%;
 margin-top: 5%;
 display: flex;
 align-items: center;
-padding-left: 3%;
-padding-right: 3%;
+padding: 5%;
 justify-content: space-around;
 flex-direction: column;
+
+}
+.notes__currentnote h1{
+    font-family: "Cabin";
+    font-weight: 600;
+    font-size: 24px;
+    display: flex;
+    padding-bottom: 5%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.notes__body{
+    font-family: "Cabin";
+    font-size: 24px;
+    color: #3D3D3D;
+    line-height: 29px;
+    font-weight: 400;
+    min-width: 100%;
+    max-width: 100%;
 }
 .notes__scroll{
-   
- 
     height: 50vh;
     width: 30%;
     margin-left: 5%;
     background: #FFFFFF;
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+}
+.notes__footer{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.notes__time{
+    font-weight: 600;
+    font-family: "Cabin";
+    font-size: 24px;
+}
+.notes__scrollhead{
+    height: 12%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F3F3F3;
+}
+.notes__scrollbody{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-family: "Cabin";
+    height: 88%;
+    overflow-y: auto;
+
+}
+.notes__scrollselect{
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.scroll__active{
+    background-color: #0DBFBE;
+    color: white;
 }
