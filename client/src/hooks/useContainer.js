@@ -11,15 +11,12 @@ export default function useContainer(getUrl, parent, key) {
   // functionalities
   const fetchData = async (id) => {
     try {
-      const { data } = axios.get(
-        `${getUrl}/${id}`,
-        {},
-        {
-          headers: {
-            firebase_token: await firebaseUser.getIdToken(),
-          },
-        }
-      );
+      const firebase_token = await firebaseUser.getIdToken();
+      const { data } = await axios.get(`${getUrl}/${id}`, {
+        headers: {
+          firebase_token,
+        },
+      });
       setData(data);
     } catch (error) {
       console.log(error);
@@ -40,7 +37,7 @@ export default function useContainer(getUrl, parent, key) {
     if (parent) {
       if (!currentId || !parent[key].includes(currentId)) {
         // console.log("Backend User From workspace", backendUser);
-        setCurrentId(parent[key][0]);
+        if (parent[key][0]) setCurrentId(parent[key][0]._id);
       }
     }
   }, [parent]);
