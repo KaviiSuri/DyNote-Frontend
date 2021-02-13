@@ -19,6 +19,7 @@ import {
   Text,
   Spacer,
   Divider,
+  Input,
 } from "@chakra-ui/react";
 import { RiMenu2Line } from "react-icons/ri";
 import { BsChevronExpand } from "react-icons/bs";
@@ -85,17 +86,23 @@ const SideBar = () => {
                   bg="brand.dark"
                   textAlign="left"
                   color="white"
-                  leftIcon={<VscVmActive color="green"/>}
+                  leftIcon={<AddWorkSpace/> }
                   rightIcon={<BsChevronExpand />}>
                     WEBDEV
                   </MenuButton>
-                  <MenuList fontSize="sm" width="118.7%"  textTransform="uppercase" bg="brand.light" borderRadius="none" >
+                  <MenuList boxShadow="-1px 0px 11px 1px rgba(0,0,0,0.75);
+                            -webkit-box-shadow: -1px 0px 11px 1px rgba(0,0,0,0.75);
+                            -moz-box-shadow: -1px 0px 11px 1px rgba(0,0,0,0.75);"
+                            fontSize="sm" width="118.7%"  
+                            textTransform="uppercase"
+                              bg="brand.light" 
+                              borderRadius="none" >
                     <MenuItem textAlign="center"   textTransform="uppercase" >
                       <Text textAlign="center" width="100%">
                       Machine Learning
                       </Text>
                       </MenuItem>
-                  <AddWorkSpace/>
+                  
                   </MenuList>
                 </Menu>
           
