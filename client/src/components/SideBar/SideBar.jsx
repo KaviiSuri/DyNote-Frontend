@@ -27,8 +27,9 @@ import {
 
   import "./SideBar.css"
 import React from 'react'
-import AddWorkBook from "../AddWorkBook/AddWorkBook";
 import NoteBooks from "../NoteBooks/NoteBooks";
+import AddNoteBook from "../AddNoteBook/AddNoteBook";
+import AddWorkSpace from "../AddWorkSpace/AddWorkSpace";
 const SideBar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return ( <>
@@ -77,9 +78,13 @@ const SideBar = () => {
                   rightIcon={<BsChevronExpand />}>
                     WEBDEV
                   </MenuButton>
-                  <MenuList fontSize="sm" width="120%"  textTransform="uppercase" bg="brand.light" borderRadius="none" >
-                    <MenuItem        textAlign="left"  textTransform="uppercase" >Machine Learning</MenuItem>
-            
+                  <MenuList fontSize="sm" width="118.7%"  textTransform="uppercase" bg="brand.light" borderRadius="none" >
+                    <MenuItem textAlign="center"   textTransform="uppercase" >
+                      <Text textAlign="center" width="100%">
+                      Machine Learning
+                      </Text>
+                      </MenuItem>
+                  <AddWorkSpace/>
                   </MenuList>
                 </Menu>
           
@@ -89,7 +94,7 @@ const SideBar = () => {
               
 
               <Stack mt="12" spacing="10">
-                <AddWorkBook/>
+                <AddNoteBook/>
                   <NoteBooks/>
           
               </Stack>
