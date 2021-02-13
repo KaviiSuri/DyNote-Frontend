@@ -14,7 +14,7 @@ const Scrolls = () => {
         <div className="scrolls__icon">
           <AiFillCaretRight size="25px" />
         </div>
-        <h1>{notebookData && notebookData.name}</h1>
+        <h1 style={{textTransform:"uppercase"}} >{notebookData && notebookData.name}</h1>
         <span className="scrolls__underlinedecor"></span>
       </div>
       <SimpleGrid mt="20" columns={[3, 4, 4]} spacing="10">

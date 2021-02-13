@@ -9,10 +9,13 @@ const WorkSpace = () => {
     <>
       <SideBar />
       <div className="main__container">
+
         <Switch>
           <Route path="/workspace/scroll/:id" component={NotesPage} />
           <Route path="/" component={Scrolls} />
         </Switch>
+    
+        
       </div>
     </>
   );
