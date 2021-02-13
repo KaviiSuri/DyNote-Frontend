@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import ReactPlayer from "react-player";
 import { IoMdAddCircle } from "react-icons/io";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import "./NotesPage.css";
-import { MdEdit } from "react-icons/md";
+import { FaShareAlt } from "react-icons/fa";
+import {AiFillEye} from "react-icons/ai"
 import { useState, useEffect } from "react";
 import Note from "../../components/Note/Note";
 import { useScroll } from "../../providers/scrollProvider";
@@ -109,9 +109,14 @@ const NotesPage = ({ match }) => {
                 onClick={createBlankNote}
                 size="24px"
                 color="#0DBFBE"
+                style={{cursor:"pointer"}}
               />
-              <IoMdAddCircle />
-              <IoMdAddCircle />
+              <AiFillEye size="24px"
+                style={{cursor:"pointer"}}
+                color="#0DBFBE"  />
+              <FaShareAlt  size="24px"
+                style={{cursor:"pointer"}}
+                color="#0DBFBE" />
             </div>
             <div className="notes__scrollbody">
               {notes &&
