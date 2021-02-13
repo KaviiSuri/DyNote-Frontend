@@ -31,9 +31,22 @@ import AddWorkSpace from "../AddWorkSpace/AddWorkSpace";
 import AddNoteBook from "../AddNoteBook/AddNoteBook";
 import NoteBooks from "../NoteBooks/NoteBooks";
 import { useAuth } from "../../providers/authProvider";
+import { useWorkspace } from "../../providers/workspaceProvider";
 const SideBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { firebaseUser, logout } = useAuth();
+  const { firebaseUser, logout, backendUser } = useAuth();
+  const {
+    workspaceData,
+    currentWorkspaceId,
+    setCurrentWorkspaceId,
+  } = useWorkspace();
+  const getCurrWorkspaceName = () => {
+    const obj = backendUser.workspaces.find(
+      (w) => w._id === currentWorkspaceId
+    );
+    if (obj && obj.name) return obj.name;
+    else return "no workspace";
+  };
   return (
     <>
       <Button
@@ -86,35 +99,43 @@ const SideBar = () => {
                   bg="brand.dark"
                   textAlign="left"
                   color="white"
-                  leftIcon={<AddWorkSpace/> }
-                  rightIcon={<BsChevronExpand />}>
-                    WEBDEV
-                  </MenuButton>
-                  <MenuList boxShadow="-1px 0px 11px 1px rgba(0,0,0,0.75);
+                  leftIcon={<AddWorkSpace />}
+                  rightIcon={<BsChevronExpand />}
+                >
+                  {getCurrWorkspaceName()}
+                </MenuButton>
+                <MenuList
+                  boxShadow="-1px 0px 11px 1px rgba(0,0,0,0.75);
                             -webkit-box-shadow: -1px 0px 11px 1px rgba(0,0,0,0.75);
                             -moz-box-shadow: -1px 0px 11px 1px rgba(0,0,0,0.75);"
-                            fontSize="sm" width="118.7%"  
-                            textTransform="uppercase"
-                              bg="brand.light" 
-                              borderRadius="none" >
-                    <MenuItem textAlign="center"   textTransform="uppercase" >
-                      <Text textAlign="center" width="100%">
-                      Machine Learning
-                      </Text>
-                      </MenuItem>
-                  
-                  </MenuList>
-                </Menu>
-          
-              </DrawerHeader>
-              <DrawerBody bg="brand.dark">
-
-              
-
+                  fontSize="sm"
+                  width="118.7%"
+                  textTransform="uppercase"
+                  bg="brand.light"
+                  borderRadius="none"
+                >
+                  {backendUser.workspaces
+                    .filter((w) => w._id !== currentWorkspaceId)
+                    .map((w) => {
+                      return (
+                        <MenuItem
+                          onClick={() => setCurrentWorkspaceId(w._id)}
+                          textAlign="center"
+                          textTransform="uppercase"
+                        >
+                          <Text textAlign="center" width="100%">
+                            {w.name}
+                          </Text>
+                        </MenuItem>
+                      );
+                    })}
+                </MenuList>
+              </Menu>
+            </DrawerHeader>
+            <DrawerBody bg="brand.dark">
               <Stack mt="12" spacing="10">
-                <AddNoteBook/>
-                  <NoteBooks/>
-          
+                <AddNoteBook />
+                <NoteBooks />
               </Stack>
             </DrawerBody>
             <Divider />
