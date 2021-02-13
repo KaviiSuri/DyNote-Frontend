@@ -26,7 +26,8 @@ import { VscVmActive } from "react-icons/vsc";
 
 import "./SideBar.css";
 import React from "react";
-import AddWorkBook from "../AddWorkBook/AddWorkBook";
+import AddWorkSpace from "../AddWorkSpace/AddWorkSpace";
+import AddNoteBook from "../AddNoteBook/AddNoteBook";
 import NoteBooks from "../NoteBooks/NoteBooks";
 import { useAuth } from "../../providers/authProvider";
 const SideBar = () => {
@@ -84,28 +85,29 @@ const SideBar = () => {
                   bg="brand.dark"
                   textAlign="left"
                   color="white"
-                  leftIcon={<VscVmActive color="green" />}
-                  rightIcon={<BsChevronExpand />}
-                >
-                  WEBDEV
-                </MenuButton>
-                <MenuList
-                  fontSize="sm"
-                  width="120%"
-                  textTransform="uppercase"
-                  bg="brand.light"
-                  borderRadius="none"
-                >
-                  <MenuItem textAlign="left" textTransform="uppercase">
-                    Machine Learning
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            </DrawerHeader>
-            <DrawerBody bg="brand.dark">
+                  leftIcon={<VscVmActive color="green"/>}
+                  rightIcon={<BsChevronExpand />}>
+                    WEBDEV
+                  </MenuButton>
+                  <MenuList fontSize="sm" width="118.7%"  textTransform="uppercase" bg="brand.light" borderRadius="none" >
+                    <MenuItem textAlign="center"   textTransform="uppercase" >
+                      <Text textAlign="center" width="100%">
+                      Machine Learning
+                      </Text>
+                      </MenuItem>
+                  <AddWorkSpace/>
+                  </MenuList>
+                </Menu>
+          
+              </DrawerHeader>
+              <DrawerBody bg="brand.dark">
+
+              
+
               <Stack mt="12" spacing="10">
-                <AddWorkBook />
-                <NoteBooks />
+                <AddNoteBook/>
+                  <NoteBooks/>
+          
               </Stack>
             </DrawerBody>
             <Divider />
