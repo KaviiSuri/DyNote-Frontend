@@ -1,0 +1,23 @@
+.scrolls__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 15vw;
+    min-width: 15vw;
+    position: relative;
+}
+.scrolls__header h1{
+    font-family: "Cabin";
+    font-size: 36px;
+    font-weight: 700;
+    color: #3EC7C2;
+}
+.scrolls__underlinedecor{
+    position: absolute;
+    width: 150px;
+    height: 9px;
+    background-color: #041D2C;
+    bottom: -9px;
+    right: 0;
+    border-radius: 30px;
+}

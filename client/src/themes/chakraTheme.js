@@ -5,7 +5,7 @@ import "fontsource-cabin";
 const colors = {
   brand: {
     light: "#F4F7F6",
-    medium: "#49C5B6",
+    medium: "#0DBFBE",
     dark: "#041D2C",
     highlight: "#3EC7C2",
   },
