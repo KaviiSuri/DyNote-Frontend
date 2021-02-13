@@ -29,6 +29,7 @@ export function AuthProvider({ children }) {
   async function logout() {
     setBackendUser(undefined);
     await auth.signOut();
+    history.push("/home");
   }
   async function signinBackend(user) {
     try {
