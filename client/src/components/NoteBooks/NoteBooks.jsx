@@ -1,7 +1,8 @@
-import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Badge, Box } from '@chakra-ui/react';
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Badge, Box, Stack } from '@chakra-ui/react';
 import React from 'react'
 import { Link } from 'react-router-dom';
 import {AiFillCaretDown} from "react-icons/ai"
+import "./NoteBooks.css"
 const NoteBooks = () => {
     return (<Accordion defaultIndex={[0]} allowMultiple>
         <AccordionItem  border="none"
@@ -28,7 +29,10 @@ const NoteBooks = () => {
             </AccordionButton>
           </h2>
           <AccordionPanel textTransform="uppercase" textAlign="center" color="white" pb={4}>
-                  <Link to="workspace/" className="notebook__link">React Js</Link>
+            <Stack spacing={4} >
+                  <Link to="workspace" className="notebook__link notebook__active">React Js</Link>
+                  <Link to="workspace" className="notebook__link">Node Js</Link>
+            </Stack>
           </AccordionPanel>
         </AccordionItem>
       

@@ -32,12 +32,8 @@ const NotesPage = () => {
         <div className="notes__currentnote">
             <h1>REACT INTRODUCTION<span style={{marginLeft:"5%", cursor:"pointer"}} > <MdEdit size="24px" /></span></h1>
             <ReactQuill theme="bubble" className="notes__body" value={" Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam facilis illo perferendis molestias. Blanditiis, expedita adipisci quae temporibus laborum ipsum quaerat aut. Temporibus nesciunt quo et est facere dicta quam, necessitatibus architecto explicabo, quisquam commodi nihil eos, cupiditate dolorem quidem earum aliquam officia nam qui odit at ipsum porro doloribus."} />
-            {/* <div className="notes__body">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam facilis illo perferendis molestias. Blanditiis, expedita adipisci quae temporibus laborum ipsum quaerat aut. Temporibus nesciunt quo et est facere dicta quam, necessitatibus architecto explicabo, quisquam commodi nihil eos, cupiditate dolorem quidem earum aliquam officia nam qui odit at ipsum porro doloribus.
-            </div> */}
             <div className="notes__footer"> 
                 <div className="notes__time">4:00</div>
-                {/* <div className="notes__edit"><MdEdit size="24px" /></div> */}
              </div>
         </div>
     </div>
