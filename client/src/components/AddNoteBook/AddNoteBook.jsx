@@ -40,12 +40,12 @@ const AddNoteBook = () => {
         }
       );
       const newNotebookArr = workspaceData.notebooks.map((nb) => ({ ...nb }));
-      newNotebookArr.push({ _id: data._id, name: data.name });
+      newNotebookArr.push(data);
       setWorkspaceData({ ...workspaceData, notebooks: newNotebookArr });
       onClose();
     } catch (error) {
       console.log(error);
-      console.log(error.response.data);
+      if (error.response) console.log(error.response.data);
       onClose();
     }
   };
