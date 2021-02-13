@@ -28,7 +28,7 @@ const NoteBooks = () => {
             </AccordionButton>
           </h2>
           <AccordionPanel textTransform="uppercase" textAlign="center" color="white" pb={4}>
-                  <Link className="notebook__link">React Js</Link>
+                  <Link to="workspace/" className="notebook__link">React Js</Link>
           </AccordionPanel>
         </AccordionItem>
       
