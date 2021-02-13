@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider, CSSReset } from "@chakra-ui/react";
 import { theme } from "./themes/chakraTheme";
 import "fontsource-aileron";
+import "fontsource-aileron/300.css";
 import "./index.css";
 import App from "./App";
 

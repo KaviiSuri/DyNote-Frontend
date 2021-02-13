@@ -20,7 +20,7 @@ const Home = () => {
       </div>
       <div className="main__header">
         <div className="main__heading">
-          <h1>DYNOTE</h1> 
+          <h1> <span style={{color:"#3EC7C2"}} >DY</span>NOTE</h1> 
           
         </div>
         <Link to={"/workspace"} className="home__login">
