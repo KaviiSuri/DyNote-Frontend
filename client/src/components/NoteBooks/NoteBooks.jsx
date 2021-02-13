@@ -5,6 +5,7 @@ import {
   AccordionPanel,
   Badge,
   Box,
+  Stack,
 } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -12,6 +13,7 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { useWorkspace } from "../../providers/workspaceProvider";
 import { useNotebook } from "../../providers/notebookProvider";
 import { useScroll } from "../../providers/scrollProvider";
+import "./NoteBooks.css"
 const NoteBooks = () => {
   const { workspaceData } = useWorkspace();
   const { currentNotebookId, setCurrentNotebookId } = useNotebook();
@@ -73,6 +75,7 @@ const NoteBooks = () => {
                 color="white"
                 pb={4}
               >
+              <Stack spacing="3">
                 {nb &&
                   nb.scrolls &&
                   nb.scrolls.map((sc) => {
@@ -90,6 +93,8 @@ const NoteBooks = () => {
                       </Link>
                     );
                   })}
+                </Stack>
+               
               </AccordionPanel>
             </AccordionItem>
           );
