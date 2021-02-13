@@ -10,6 +10,9 @@
     height: 50vh;
     width: 100%;
 }
+.notes__vid{
+    height: 50vh;
+}
 .notes__currentnote{
 background: #FFFFFF;
 box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
