@@ -38,7 +38,7 @@ flex-direction: column;
     align-items: center;
 }
 .notes__body{
-    font-family: "Cabin";
+    font-family: "Cabin"!important;
     font-size: 24px;
     color: #3D3D3D;
     line-height: 29px;
@@ -88,4 +88,15 @@ flex-direction: column;
 .scroll__active{
     background-color: #0DBFBE;
     color: white;
+}
+.notes__save{
+    background-color: #0DBFBE;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5vw;
+    cursor: pointer;
+    font-family: "Cabin";
+    font-weight: 600;
 }
