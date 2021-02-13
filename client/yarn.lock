@@ -6106,6 +6106,11 @@ fontsource-aileron@^4.0.0:
   resolved "https://registry.yarnpkg.com/fontsource-aileron/-/fontsource-aileron-4.0.0.tgz#4cc43484e2a3b2d565824989f9eaea5ea9ce8cd8"
   integrity sha512-rWi9oUkJUhu2C39SnYx8ddcs6QtDdzlrvq8CLUmEtW07j9u8ynwIQyCeRu456Klavuc8R+4zIiWm8S+OElbCmw==
 
+fontsource-cabin@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/fontsource-cabin/-/fontsource-cabin-4.0.0.tgz#9312ed8aab2b94258a464bb96f2a3ad42ab97299"
+  integrity sha512-otdChxs2eMYbcHT8QEs9kpaTsmnbZ6qW8h++xcF15JLRXGTgzNo72nq6x5PU/1sSKUiKagL1e4sZ5deq5162ig==
+
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
