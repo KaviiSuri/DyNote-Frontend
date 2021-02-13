@@ -16,8 +16,54 @@ const AddWorkSpace = () => {
        onClick={onOpen}>
          <IoMdAddCircle size="16px"/>
 </Button>
- {/* <MenuItem textAlign="left"  textTransform="uppercase" >Machine Learning</MenuItem> */}
-<Modal isOpen={isOpen} onClose={onClose}>
+ 
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Create WorkSpace</ModalHeader>
+          <ModalCloseButton
+            _focus={{
+              boxShadow:
+                "0 0 0px 0px rgba(88, 144, 255, 0), 0 1px 1px rgba(0, 0, 0, 0)",
+            }}
+          />
+          <ModalBody>
+            <Input
+              _focus={{
+                boxShadow:
+                  "0 0 0px 0px rgba(88, 144, 255, 0), 0 1px 1px rgba(0, 0, 0, 0)",
+              }}
+              placeholder="Workspace Title"
+            />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              _focus={{
+                boxShadow:
+                  "0 0 0px 0px rgba(88, 144, 255, 0), 0 1px 1px rgba(0, 0, 0, 0)",
+              }}
+              _hover={{ bg: "brand.highlight" }}
+              bg="brand.medium"
+              color="white"
+              mr={3}
+              onClick={onClose}
+            >
+              Create
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+export default AddWorkSpace;
+
+
+
+{/* <MenuItem textAlign="left"  textTransform="uppercase" >Machine Learning</MenuItem> */}
+{/* <Modal isOpen={isOpen} onClose={onClose}>
   <ModalOverlay />
   <ModalContent>
     <ModalHeader>Create WorkSpace</ModalHeader>
@@ -30,12 +76,5 @@ const AddWorkSpace = () => {
       <Button   _focus={{   boxShadow:"0 0 0px 0px rgba(88, 144, 255, 0), 0 1px 1px rgba(0, 0, 0, 0)"}}
     _hover={{bg:"brand.highlight"}} bg="brand.medium" color="white" mr={3} onClick={onClose}>
        Create
-      </Button>
-  
-    </ModalFooter>
-  </ModalContent>
-</Modal>
-    </> );
-}
- 
-export default AddWorkSpace;
+      </Button> */}
+      {/* <MenuItem textAlign="left"  textTransform="uppercase" >Machine Learning</MenuItem> */}

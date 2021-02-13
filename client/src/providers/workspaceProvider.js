@@ -1,23 +1,30 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import { rootUrl } from "../config";
+import { useAuth } from "../providers/authProvider";
+import useContainer from "../hooks/useContainer";
+
 const WorkspaceContext = React.createContext();
-const WorkspaceUpdateContext = React.createContext();
-// exports
+
 export function useWorkspace() {
   return useContext(WorkspaceContext);
 }
-export function useWorkspaceUpdate() {
-  return useContext(WorkspaceUpdateContext);
-}
-export function WorkspaceProvider({ children }) {
-  // States
 
-  // functionalities
+export function WorkspaceProvider({ children }) {
+  const { backendUser } = useAuth();
+  const [
+    currentWorkspaceId,
+    workspaceData,
+    setCurrentWorkspaceId,
+  ] = useContainer(`${rootUrl}/workspace`, backendUser, "workspaces");
 
   return (
-    <WorkspaceContext.Provider value={}>
-      <WorkspaceUpdateContext.Provider value={}>
-        {children}
-      </WorkspaceUpdateContext.Provider>
+    <WorkspaceContext.Provider
+      value={{ currentWorkspaceId, workspaceData, setCurrentWorkspaceId }}
+    >
+      {/* <WorkspaceUpdateContext.Provider value={}> */}
+      {children}
+      {/* </WorkspaceUpdateContext.Provider> */}
     </WorkspaceContext.Provider>
   );
 }
