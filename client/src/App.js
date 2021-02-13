@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home/home";
+import Pdf from "./pages/Pdf/Pdf";
 import WorkSpace from "./pages/WorkSpace/workspace";
 import { AuthProvider } from "./providers/authProvider";
 import { NotebookProvider } from "./providers/notebookProvider";
@@ -16,6 +17,7 @@ function App() {
         <NotebookProvider>
           <ScrollProvider>
             <Switch>
+              <Route path="/pdf" component={Pdf} />
               <Route path="/home" component={Home} />
               <Route path="/workspace" component={WorkSpace} />
               {/* <Route path="/not-found" component={NotFound} /> */}

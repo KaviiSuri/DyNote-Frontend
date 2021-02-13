@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 .notes__videoemb{
     display: flex;
@@ -27,7 +28,7 @@ justify-content: space-around;
 flex-direction: column;
 
 }
-.notes__currentnote h1{
+.notes__cureentheading{
     font-family: "Cabin";
     font-weight: 600;
     font-size: 24px;
@@ -99,4 +100,17 @@ flex-direction: column;
     cursor: pointer;
     font-family: "Cabin";
     font-weight: 600;
+}
+.notes__pdfmode{
+    position: fixed;
+    right: 3vw;
+    bottom: 3vw;
+    background-color: white;
+    width: 4vw;
+    height: 4vw;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }

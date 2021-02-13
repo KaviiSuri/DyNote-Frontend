@@ -42,6 +42,7 @@ const Note = ({ note, patchNote }) => {
   return (
     <div className="notes__currentnote">
       <h1
+        className="notes__cureentheading"
         contentEditable={true}
         onInput={handleName}
         onBlur={handleNameSubmit}

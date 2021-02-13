@@ -4,13 +4,14 @@ import { IoMdAddCircle } from "react-icons/io";
 import "react-quill/dist/quill.bubble.css";
 import "./NotesPage.css";
 import { FaShareAlt } from "react-icons/fa";
-import {AiFillEye} from "react-icons/ai"
+import {AiFillEye,AiFillFilePdf} from "react-icons/ai"
 import { useState, useEffect } from "react";
 import Note from "../../components/Note/Note";
 import { useScroll } from "../../providers/scrollProvider";
 import axios from "axios";
 import { rootUrl } from "../../config";
 import { useAuth } from "../../providers/authProvider";
+import { Link } from "react-router-dom";
 
 const NotesPage = ({ match }) => {
   const {
@@ -24,7 +25,7 @@ const NotesPage = ({ match }) => {
   const playerRef = useRef();
   const { firebaseUser } = useAuth();
   const [currentNoteId, setCurrentNoteId] = useState();
-
+  const [visible,setVisible] = useState(false);
   useEffect(() => {
     setCurrentScrollId(match.params.id);
   }, []);
@@ -34,6 +35,9 @@ const NotesPage = ({ match }) => {
       setCurrentNoteId(notes[0]._id);
     }
   }, [notes, scrollData]);
+  const handleVisibility = () =>{
+      setVisible(!visible);
+  }
   const createBlankNote = async () => {
     try {
       const { data } = await axios.post(
@@ -76,6 +80,7 @@ const NotesPage = ({ match }) => {
         setCurrentNoteId(notes[currNoteIndex]._id);
     }
   };
+
   const patchNote = async (id, body) => {
     try {
       const { data } = await axios.patch(`${rootUrl}/note/${id}`, body, {
@@ -111,9 +116,13 @@ const NotesPage = ({ match }) => {
                 color="#0DBFBE"
                 style={{cursor:"pointer"}}
               />
-              <AiFillEye size="24px"
+              {visible?<AiFillEye size="24px"
+              onClick={handleVisibility}
                 style={{cursor:"pointer"}}
-                color="#0DBFBE"  />
+                color="red"/>:<AiFillEye size="24px"
+                style={{cursor:"pointer"}}
+                color="#0DBFBE" onClick={handleVisibility} />}
+              
               <FaShareAlt  size="24px"
                 style={{cursor:"pointer"}}
                 color="#0DBFBE" />
@@ -123,6 +132,7 @@ const NotesPage = ({ match }) => {
                 notes.map((nt) => {
                   return (
                     <div
+                    style={{cursor:"pointer"}}
                       className={
                         "notes__scrollselect" +
                         (currentNoteId === nt._id ? " scroll__active" : "")
@@ -151,6 +161,9 @@ const NotesPage = ({ match }) => {
             note={notes.find((nt) => nt._id === currentNoteId)}
           />
         )}
+        <Link target="_blank" to={"/pdf"} className="notes__pdfmode">
+          <AiFillFilePdf size="30px" />
+        </Link>
       </div>
     </>
   );
