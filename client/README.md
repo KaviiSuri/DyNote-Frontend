@@ -1,6 +1,8 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is called DyNote and is used to make your notes more dynamic.
+It's deployed to netlify (here)[https://dynote.netlify.app]
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c9fb47af-3986-42d0-b9f6-e57e44caba1f/deploy-status)](https://app.netlify.com/sites/dynote/deploys)
 
 ## Available Scripts
 
