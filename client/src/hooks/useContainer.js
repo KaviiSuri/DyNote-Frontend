@@ -11,7 +11,9 @@ export default function useContainer(getUrl, parent, key, defaultZero) {
   // functionalities
   const fetchData = async (id) => {
     try {
-      const firebase_token = await firebaseUser.getIdToken();
+      const firebase_token = firebaseUser
+        ? await firebaseUser.getIdToken()
+        : "";
       const { data } = await axios.get(`${getUrl}/${id}`, {
         headers: {
           firebase_token,

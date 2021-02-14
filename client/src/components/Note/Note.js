@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import { MdEdit } from "react-icons/md";
+import { useAuth } from "../../providers/authProvider";
+import { useScroll } from "../../providers/scrollProvider";
 
 const Note = ({ note, patchNote }) => {
+  const { backendUser } = useAuth();
+  const { scrollData } = useScroll();
+  const [isOwner, setIsOwner] = useState(false);
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }],
@@ -17,12 +22,17 @@ const Note = ({ note, patchNote }) => {
       ["clean"],
     ],
   };
+  useEffect(() => {
+    setIsOwner(
+      backendUser && scrollData && backendUser._id === scrollData.owner
+    );
+  }, [backendUser, scrollData]);
+
   const [name, setName] = useState(note.name);
   const [content, setContent] = useState(note.content || "");
   const [save, setSave] = useState(false);
   const handleContentSubmit = async () => {
-    // console.log(content);
-    if (patchNote) {
+    if (isOwner && patchNote) {
       await patchNote(note._id, { content: content });
     }
     setSave(false);
@@ -32,7 +42,7 @@ const Note = ({ note, patchNote }) => {
     setContent(e);
   };
   const handleNameSubmit = async () => {
-    if (patchNote) {
+    if (isOwner && patchNote) {
       await patchNote(note._id, { name: name });
     }
   };
@@ -43,7 +53,7 @@ const Note = ({ note, patchNote }) => {
     <div className="notes__currentnote">
       <h1
         className="notes__cureentheading"
-        contentEditable={true}
+        contentEditable={isOwner}
         onInput={handleName}
         onBlur={handleNameSubmit}
         style={{ outlineWidth: "0px" }}
@@ -51,7 +61,7 @@ const Note = ({ note, patchNote }) => {
         {name}
         <span style={{ marginLeft: "5%", cursor: "pointer" }}>
           {" "}
-          <MdEdit onClick={() => setSave(true)} size="24px" />
+          {isOwner && <MdEdit onClick={() => setSave(true)} size="24px" />}
         </span>
       </h1>
       <ReactQuill

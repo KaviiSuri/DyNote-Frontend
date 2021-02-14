@@ -37,7 +37,9 @@ export function ScrollProvider({ children }) {
   // ] = useContainer(`${rootUrl}/scroll`, notebookData, "scrolls", false);
   const fetchData = async (id) => {
     try {
-      const firebase_token = await firebaseUser.getIdToken();
+      const firebase_token = firebaseUser
+        ? await firebaseUser.getIdToken()
+        : "";
       const { data } = await axios.get(`${rootUrl}/scroll/${id}`, {
         headers: {
           firebase_token,
@@ -54,7 +56,7 @@ export function ScrollProvider({ children }) {
       }
     } catch (error) {
       console.log(error);
-      console.log(error.response.data);
+      if (error.response) console.log(error.response.data);
     }
   };
 

@@ -44,7 +44,7 @@ const ScrollCard = () => {
         },
         {
           headers: {
-            firebase_token: await firebaseUser.getIdToken(),
+            firebase_token: firebaseUser ? await firebaseUser.getIdToken() : "",
           },
         }
       );

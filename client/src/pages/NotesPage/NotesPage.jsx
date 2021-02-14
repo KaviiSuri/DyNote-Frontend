@@ -4,7 +4,7 @@ import { IoMdAddCircle } from "react-icons/io";
 import "react-quill/dist/quill.bubble.css";
 import "./NotesPage.css";
 import { FaShareAlt } from "react-icons/fa";
-import {AiFillEye,AiFillFilePdf} from "react-icons/ai"
+import { AiFillEye, AiFillFilePdf, AiFillEyeInvisible } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import Note from "../../components/Note/Note";
 import { useScroll } from "../../providers/scrollProvider";
@@ -12,6 +12,7 @@ import axios from "axios";
 import { rootUrl } from "../../config";
 import { useAuth } from "../../providers/authProvider";
 import { Link } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
 
 const NotesPage = ({ match }) => {
   const {
@@ -25,7 +26,8 @@ const NotesPage = ({ match }) => {
   const playerRef = useRef();
   const { firebaseUser } = useAuth();
   const [currentNoteId, setCurrentNoteId] = useState();
-  const [visible,setVisible] = useState(false);
+  const toast = useToast();
+
   useEffect(() => {
     setCurrentScrollId(match.params.id);
   }, []);
@@ -35,9 +37,28 @@ const NotesPage = ({ match }) => {
       setCurrentNoteId(notes[0]._id);
     }
   }, [notes, scrollData]);
-  const handleVisibility = () =>{
-      setVisible(!visible);
-  }
+  const handleVisibility = async () => {
+    try {
+      if (scrollData) {
+        const { data } = await axios.patch(
+          `${rootUrl}/scroll/${scrollData._id}`,
+          {
+            public: scrollData.public ? false : true,
+          },
+          {
+            headers: {
+              firebase_token: firebaseUser
+                ? await firebaseUser.getIdToken()
+                : "",
+            },
+          }
+        );
+        setScrollData({ ...scrollData, public: data.public });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const createBlankNote = async () => {
     try {
       const { data } = await axios.post(
@@ -50,7 +71,7 @@ const NotesPage = ({ match }) => {
         },
         {
           headers: {
-            firebase_token: await firebaseUser.getIdToken(),
+            firebase_token: firebaseUser ? await firebaseUser.getIdToken() : "",
           },
         }
       );
@@ -85,7 +106,7 @@ const NotesPage = ({ match }) => {
     try {
       const { data } = await axios.patch(`${rootUrl}/note/${id}`, body, {
         headers: {
-          firebase_token: await firebaseUser.getIdToken(),
+          firebase_token: firebaseUser ? await firebaseUser.getIdToken() : "",
         },
       });
       let newNotes = notes.map((nt) => ({ ...nt }));
@@ -95,6 +116,27 @@ const NotesPage = ({ match }) => {
     } catch (error) {
       console.log(error);
       console.log(error.response.data);
+    }
+  };
+  const handleShare = () => {
+    try {
+      navigator.clipboard.writeText(window.location);
+      toast({
+        title: "Copied To Clipboard Successfully",
+        description: "Sharing Link Copied to clipboard",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: "Could note copy to clipboard",
+        description:
+          "Could note copy to clipboard, please use the current URL instead",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
   return (
@@ -114,25 +156,37 @@ const NotesPage = ({ match }) => {
                 onClick={createBlankNote}
                 size="24px"
                 color="#0DBFBE"
-                style={{cursor:"pointer"}}
+                style={{ cursor: "pointer" }}
               />
-              {visible?<AiFillEye size="24px"
-              onClick={handleVisibility}
-                style={{cursor:"pointer"}}
-                color="red"/>:<AiFillEye size="24px"
-                style={{cursor:"pointer"}}
-                color="#0DBFBE" onClick={handleVisibility} />}
-              
-              <FaShareAlt  size="24px"
-                style={{cursor:"pointer"}}
-                color="#0DBFBE" />
+              {scrollData && scrollData.public ? (
+                <AiFillEye
+                  size="24px"
+                  onClick={handleVisibility}
+                  style={{ cursor: "pointer" }}
+                  color="#0DBFBE"
+                />
+              ) : (
+                <AiFillEyeInvisible
+                  size="24px"
+                  style={{ cursor: "pointer" }}
+                  color="#0DBFBE"
+                  onClick={handleVisibility}
+                />
+              )}
+
+              <FaShareAlt
+                size="24px"
+                style={{ cursor: "pointer" }}
+                color="#0DBFBE"
+                onClick={handleShare}
+              />
             </div>
             <div className="notes__scrollbody">
               {notes &&
                 notes.map((nt) => {
                   return (
                     <div
-                    style={{cursor:"pointer"}}
+                      style={{ cursor: "pointer" }}
                       className={
                         "notes__scrollselect" +
                         (currentNoteId === nt._id ? " scroll__active" : "")
