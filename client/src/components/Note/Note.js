@@ -40,6 +40,10 @@ const Note = ({ note, patchNote, editable = true }) => {
     }
     setSave(false);
   };
+  useEffect(() => {
+    setName(note.name);
+    setContent(note.content);
+  }, [note]);
   const handleChange = (e) => {
     setSave(true);
     setContent(e);

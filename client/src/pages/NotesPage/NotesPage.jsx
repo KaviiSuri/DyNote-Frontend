@@ -23,6 +23,7 @@ const NotesPage = ({ match }) => {
     notes,
     setNotes,
   } = useScroll();
+  const [currNoteData, setCurrNoteData] = useState();
   const playerRef = useRef();
   const { firebaseUser } = useAuth();
   const [currentNoteId, setCurrentNoteId] = useState();
@@ -31,12 +32,15 @@ const NotesPage = ({ match }) => {
   useEffect(() => {
     setCurrentScrollId(match.params.id);
   }, []);
+  // useEffect(() => {
+  //   if (notes && notes[0] && !currentNoteId) {
+  //     //   console.log("Loading First Note");
+  //     setCurrentNoteId(notes[0]._id);
+  //   }
+  // }, [notes, scrollData]);
   useEffect(() => {
-    if (notes && notes[0] && !currentNoteId) {
-      //   console.log("Loading First Note");
-      setCurrentNoteId(notes[0]._id);
-    }
-  }, [notes, scrollData]);
+    if (notes) setCurrNoteData(notes.find((nt) => nt._id === currentNoteId));
+  }, [currentNoteId]);
   const handleVisibility = async () => {
     try {
       if (scrollData) {
@@ -95,10 +99,12 @@ const NotesPage = ({ match }) => {
       } else {
         currNoteIndex = Math.max(0, currNoteIndex - 1);
       }
+
       // console.log(notes.find((nt) => nt.start_time > playedSeconds));
       // console.log("currNoteIndex: ", currNoteIndex);
       if (notes && notes[currNoteIndex])
         setCurrentNoteId(notes[currNoteIndex]._id);
+      // console.log(notes.find((nt) => nt._id === currentNoteId));
     }
   };
 
@@ -209,12 +215,8 @@ const NotesPage = ({ match }) => {
             </div>
           </div>
         </div>
-        {notes && notes.find((nt) => nt._id === currentNoteId) && (
-          <Note
-            patchNote={patchNote}
-            note={notes.find((nt) => nt._id === currentNoteId)}
-          />
-        )}
+
+        {currNoteData && <Note patchNote={patchNote} note={currNoteData} />}
         {scrollData && (
           <Link
             target="_blank"
