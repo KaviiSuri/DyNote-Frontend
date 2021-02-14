@@ -22,6 +22,27 @@ function App() {
               <Route path="/workspace" component={WorkSpace} />
               {/* <Route path="/not-found" component={NotFound} /> */}
               <Redirect from="/" exact to="/home" />
+              <Redirect from="/index.html/workspace" exact to="/workspace" />
+              <Redirect from="/index.html/home" exact to="/home" />
+              <Redirect from="/index.html/" exact to="/home" />
+
+              <Route
+                exact
+                path="/index.html/scroll/pdf/:id"
+                render={({ match }) => (
+                  <Redirect to={`/scroll/pdf/${match.params.id}`} />
+                )}
+              />
+              <Route
+                path="/index.html/workspace/scroll/:id"
+                render={({ match }) => {
+                  console.log("hit");
+                  return (
+                    <Redirect to={`/workspace/scroll/${match.params.id}`} />
+                  );
+                }}
+              />
+
               {/* <Redirect to="/not-found" /> */}
             </Switch>
           </ScrollProvider>

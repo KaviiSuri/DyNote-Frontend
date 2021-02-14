@@ -215,13 +215,15 @@ const NotesPage = ({ match }) => {
             note={notes.find((nt) => nt._id === currentNoteId)}
           />
         )}
-        <Link
-          target="_blank"
-          to={`/scroll/pdf/${scrollData._id}`}
-          className="notes__pdfmode"
-        >
-          <AiFillFilePdf size="30px" />
-        </Link>
+        {scrollData && (
+          <Link
+            target="_blank"
+            to={`/scroll/pdf/${scrollData._id}`}
+            className="notes__pdfmode"
+          >
+            <AiFillFilePdf size="30px" />
+          </Link>
+        )}
       </div>
     </>
   );
