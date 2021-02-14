@@ -17,7 +17,7 @@ function App() {
         <NotebookProvider>
           <ScrollProvider>
             <Switch>
-              <Route path="/pdf" component={Pdf} />
+              <Route path="/scroll/pdf/:id" component={Pdf} />
               <Route path="/home" component={Home} />
               <Route path="/workspace" component={WorkSpace} />
               {/* <Route path="/not-found" component={NotFound} /> */}

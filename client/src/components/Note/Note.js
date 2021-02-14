@@ -4,7 +4,7 @@ import { MdEdit } from "react-icons/md";
 import { useAuth } from "../../providers/authProvider";
 import { useScroll } from "../../providers/scrollProvider";
 
-const Note = ({ note, patchNote }) => {
+const Note = ({ note, patchNote, editable = true }) => {
   const { backendUser } = useAuth();
   const { scrollData } = useScroll();
   const [isOwner, setIsOwner] = useState(false);
@@ -24,7 +24,10 @@ const Note = ({ note, patchNote }) => {
   };
   useEffect(() => {
     setIsOwner(
-      backendUser && scrollData && backendUser._id === scrollData.owner
+      editable &&
+        backendUser &&
+        scrollData &&
+        backendUser._id === scrollData.owner
     );
   }, [backendUser, scrollData]);
 

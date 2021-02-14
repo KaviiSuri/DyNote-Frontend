@@ -1,15 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import getThumnailLink from "../../utils/getThumnailLink";
 import "./ScrollCard.css";
 const ScrollCard = ({ scroll }) => {
-  function getParameterByName(url, name) {
-    var match = RegExp("[?&]" + name + "=([^&]*)").exec(url);
-    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
-  }
-  const thumnail = `https://img.youtube.com/vi/${getParameterByName(
-    scroll.vid_link,
-    "v"
-  )}/sddefault.jpg`;
+  const thumnail = getThumnailLink(scroll.vid_link);
   return (
     <>
       <Link
